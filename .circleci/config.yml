@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  run-regular:
+    docker:
+      - image: alpine:3.8
+    steps:
+      - checkout
+      - run: echo "regular run"
+      - run: env
+  run-tags:
+    docker:
+      - image: alpine:3.8
+    steps:
+      - checkout
+      - run: echo "tag run"
+      - run: env
+
+workflows:
+  version: 2
+  verify-dist-publish:
+    jobs:
+      - run-regular
+      - run-tags:
+          filters:
+            tags:
+              only: /^v?[0-9]+(\.[0-9]+)+(-rc[0-9]+)?$/
+            branches:
+              ignore: /.*/
