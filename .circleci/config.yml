@@ -2,14 +2,14 @@ version: 2
 jobs:
   run-regular:
     docker:
-      - image: alpine:3.8
+      - image: alpine:git
     steps:
       - checkout
       - run: echo "regular run"
       - run: env
   run-tags:
     docker:
-      - image: alpine:3.8
+      - image: alpine:git
     steps:
       - checkout
       - run: echo "tag run"
